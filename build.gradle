@@ -16,9 +16,6 @@ def springVersion = '3.2.5'
 dependencies {
     implementation "org.springframework.boot:spring-boot-starter-web:${springVersion}"
     implementation "org.springframework.boot:spring-boot-starter-aop:${springVersion}"
-    implementation "com.fasterxml.jackson.core:jackson-databind"
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor:${springVersion}"
-    implementation "com.jayway.jsonpath:json-path:2.9.0"
 }
 
 publishing {
