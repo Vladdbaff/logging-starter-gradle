@@ -1,0 +1,87 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "ru.zhdanov",
+    "module": "logging-starter-gradle",
+    "version": "1.2-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.5"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "logging-starter-gradle-1.2-SNAPSHOT.jar",
+          "url": "logging-starter-gradle-1.2-SNAPSHOT.jar",
+          "size": 11250,
+          "sha512": "6bb36f71cd1db24843a506083bf0c3be7b219361602b2210217e1a84390267bb0c2ee956d6ba5a9b368f01e0c76aec7c985d07068a14b641ab51d0c3f83a386c",
+          "sha256": "0bbc64e7939973186090153f33563fe00ffd516a78d80df4bb49cd05f1daaa5c",
+          "sha1": "831d14722014fe46797c56a85e0c5052295f87d4",
+          "md5": "bd8d8d0755d9e90d13928f540e92fe57"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-web",
+          "version": {
+            "requires": "3.2.5"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-aop",
+          "version": {
+            "requires": "3.2.5"
+          }
+        },
+        {
+          "group": "com.fasterxml.jackson.core",
+          "module": "jackson-databind"
+        },
+        {
+          "group": "com.jayway.jsonpath",
+          "module": "json-path",
+          "version": {
+            "requires": "2.9.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "logging-starter-gradle-1.2-SNAPSHOT.jar",
+          "url": "logging-starter-gradle-1.2-SNAPSHOT.jar",
+          "size": 11250,
+          "sha512": "6bb36f71cd1db24843a506083bf0c3be7b219361602b2210217e1a84390267bb0c2ee956d6ba5a9b368f01e0c76aec7c985d07068a14b641ab51d0c3f83a386c",
+          "sha256": "0bbc64e7939973186090153f33563fe00ffd516a78d80df4bb49cd05f1daaa5c",
+          "sha1": "831d14722014fe46797c56a85e0c5052295f87d4",
+          "md5": "bd8d8d0755d9e90d13928f540e92fe57"
+        }
+      ]
+    }
+  ]
+}
