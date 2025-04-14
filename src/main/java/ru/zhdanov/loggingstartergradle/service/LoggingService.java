@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.zhdanov.loggingstartergradle.dto.RequestDirection;
-import ru.zhdanov.loggingstartergradle.properties.MaskingHeaderProperties;
 import ru.zhdanov.loggingstartergradle.utils.HttpUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -18,14 +17,14 @@ import java.nio.charset.StandardCharsets;
 public class LoggingService {
 
     @Autowired
-    private MaskingHeaderProperties properties;
+    private HttpUtils httpUtils;
 
     private static final Logger log = LoggerFactory.getLogger(LoggingService.class);
 
     public void logRequest(HttpServletRequest request) {
         String method = request.getMethod();
         String requestURI = request.getRequestURI() + HttpUtils.formatQueryString(request);
-        String headers = HttpUtils.inlineHeaders(request, properties);
+        String headers = httpUtils.inlineHeaders(request);
 
         log.info("Запрос: {} {} {} {}", RequestDirection.IN, method, requestURI, headers);
     }
@@ -33,7 +32,7 @@ public class LoggingService {
     public void logFeignRequest(Request request) {
         String method = request.httpMethod().name();
         String requestURI = request.url();
-        String headers = HttpUtils.inlineHeaders(request.headers(), properties);
+        String headers = httpUtils.inlineHeaders(request.headers());
         String body = new String(request.body(), StandardCharsets.UTF_8);
 
         log.info("Запрос: {} {} {} {} body={}", RequestDirection.OUT, method, requestURI, headers, body);

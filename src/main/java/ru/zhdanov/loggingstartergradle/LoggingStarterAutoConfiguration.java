@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import ru.zhdanov.loggingstartergradle.aspect.LogExecutionAspect;
 import ru.zhdanov.loggingstartergradle.feign.FeignRequestLogger;
 import ru.zhdanov.loggingstartergradle.service.LoggingService;
+import ru.zhdanov.loggingstartergradle.utils.HttpUtils;
 import ru.zhdanov.loggingstartergradle.webfilter.WebLoggingFilter;
 import ru.zhdanov.loggingstartergradle.webfilter.WebLoggingRequestBodyAdvice;
 
@@ -15,6 +16,11 @@ import ru.zhdanov.loggingstartergradle.webfilter.WebLoggingRequestBodyAdvice;
 @ConfigurationPropertiesScan(basePackages = "ru.zhdanov.loggingstartergradle.properties")
 @ConditionalOnProperty(prefix = "logging", value = "enabled", havingValue = "true", matchIfMissing = true)
 public class LoggingStarterAutoConfiguration {
+
+    @Bean
+    public HttpUtils httpUtils() {
+        return new HttpUtils();
+    }
 
     @Bean
     @ConditionalOnProperty(prefix = "logging", value = "log-exec-time", havingValue = "true")
