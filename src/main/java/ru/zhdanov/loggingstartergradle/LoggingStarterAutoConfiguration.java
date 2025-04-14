@@ -1,10 +1,14 @@
 package ru.zhdanov.loggingstartergradle;
 
+import feign.Logger;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import ru.zhdanov.loggingstartergradle.aspect.LogExecutionAspect;
+import ru.zhdanov.loggingstartergradle.feign.FeignRequestLogger;
+import ru.zhdanov.loggingstartergradle.service.LoggingService;
+import ru.zhdanov.loggingstartergradle.utils.HttpUtils;
 import ru.zhdanov.loggingstartergradle.webfilter.WebLoggingFilter;
 import ru.zhdanov.loggingstartergradle.webfilter.WebLoggingRequestBodyAdvice;
 
@@ -12,6 +16,11 @@ import ru.zhdanov.loggingstartergradle.webfilter.WebLoggingRequestBodyAdvice;
 @ConfigurationPropertiesScan(basePackages = "ru.zhdanov.loggingstartergradle.properties")
 @ConditionalOnProperty(prefix = "logging", value = "enabled", havingValue = "true", matchIfMissing = true)
 public class LoggingStarterAutoConfiguration {
+
+    @Bean
+    public HttpUtils httpUtils() {
+        return new HttpUtils();
+    }
 
     @Bean
     @ConditionalOnProperty(prefix = "logging", value = "log-exec-time", havingValue = "true")
@@ -29,5 +38,22 @@ public class LoggingStarterAutoConfiguration {
     @ConditionalOnProperty(prefix = "logging.web-logging", value = {"enabled", "log-body"}, havingValue = "true")
     public WebLoggingRequestBodyAdvice webLoggingRequestBodyAdvice() {
         return new WebLoggingRequestBodyAdvice();
+    }
+
+    @Bean
+    public LoggingService loggingService() {
+        return new LoggingService();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "logging.web-logging", value = "log-feign-requests", havingValue = "true")
+    public FeignRequestLogger feignRequestLogger() {
+        return new FeignRequestLogger();
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "logging-web-logging", value = "log-feign-requests", havingValue = "true")
+    public Logger.Level feignLoggerLevel() {
+        return Logger.Level.BASIC;
     }
 }
